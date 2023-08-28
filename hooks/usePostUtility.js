@@ -127,7 +127,6 @@ export const PostUtilityProvider = ({ children }) => {
 
   const addPost = async (title, slug, image) => {
     try {
-      console.log(image);
       let uploadData = new FormData();
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "multipart/form-data");

@@ -32,7 +32,7 @@ const RegisterScreen = () => {
   const navigation = useNavigation();
   return (
     <ScrollView
-      scrollEnabled={false}
+      // scrollEnabled={false}
       contentContainerStyle={{ flexGrow: 1 }}
       className="bg-violet-500"
     >

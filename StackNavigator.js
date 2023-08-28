@@ -13,11 +13,13 @@ import { PostUtilityProvider } from "./hooks/usePostUtility";
 import UsersPostsScreen from "./screens/UsersPostsScreen";
 import UsersCommentsScreen from "./screens/UsersCommentsScreen";
 import WelcomeLoadingScreen from "./screens/WelcomeLoadingScreen";
+import VerifyEmail from "./screens/VerifyEmail";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import EditDateOfBirthScreen from "./screens/EditDateOfBirthScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   const { user, token, isAuthLoading } = useAuth();
-
   return (
     <>
       {token ? (
@@ -83,6 +85,22 @@ const StackNavigator = () => {
               }}
             />
             <Stack.Screen
+              name="ResetPassword"
+              component={ResetPasswordScreen}
+              options={{
+                presentation: "containedTransparentModal",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="EditDateOfBirth"
+              component={EditDateOfBirthScreen}
+              options={{
+                presentation: "containedTransparentModal",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
               name="UsersPosts"
               component={UsersPostsScreen}
               options={{
@@ -136,6 +154,15 @@ const StackNavigator = () => {
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}
+                options={{
+                  headerShown: false,
+                  navigationBarColor: "transparent",
+                  navigationBarHidden: true,
+                }}
+              />
+              <Stack.Screen
+                name="VerifyEmail"
+                component={VerifyEmail}
                 options={{
                   headerShown: false,
                   navigationBarColor: "transparent",

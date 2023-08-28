@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/pl";
@@ -7,7 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 import useAuth from "../hooks/useAuth";
 import { PencilSquareIcon, TrashIcon } from "react-native-heroicons/outline";
 import usePostUtility from "../hooks/usePostUtility";
-
+import { Image } from "expo-image";
+import { Image as RNImage } from "react-native";
 const Post = ({
   refreshPost,
   setRefreshPost,
@@ -117,6 +118,9 @@ const Post = ({
     item && post && setItem(post);
   }, [post]);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const blurhash = "Nr8%YLkDR4j[aej]NSaznzjuk9ayR3jYofayj[f6";
+
   return (
     <>
       {item && !deleteThisPost && (
@@ -149,15 +153,29 @@ const Post = ({
             </View>
           )}
           <View className="flex-row px-4 pt-2 pb-5 justify-between">
-            <Text className="font-semibold">{item.author}</Text>
+            <View className="flex-row items-center space-x-2">
+              <Image
+                className="w-10 h-10"
+                source={{ uri: `${HOST_URI}/storage/${item.authorImage}` }}
+              />
+              <Text className="font-semibold">{item.author}</Text>
+            </View>
             <Text>{moment(item.createdAt).fromNow()}</Text>
           </View>
-          <Image
-            className="w-full h-52"
-            source={{
-              uri: `${HOST_URI}/storage/${item.image}`,
+
+          <RNImage
+            onLoad={() => {
+              setTimeout(() => {
+                setImageLoaded(true);
+              }, 1000);
             }}
+            className={imageLoaded && "w-full h-52"}
+            source={{ uri: `${HOST_URI}/storage/${item.image}` }}
           />
+          {imageLoaded || (
+            <Image className="w-full h-52" placeholder={blurhash} />
+          )}
+
           <View className="p-3 space-y-3">
             <Text className="font-semibold">{item.title}</Text>
           </View>
