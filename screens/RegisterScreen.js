@@ -170,7 +170,8 @@ const RegisterScreen = () => {
                 name || setNameError("Nie podałeś danych");
                 email || setEmailError("Nie podałeś maila");
                 password || setPasswordError("Nie podałeś hasła");
-
+                password.length < 8 ||
+                  setPassword("Hasło musi mieć przynajmniej 8 znaków");
                 const doPasswordsMatch =
                   password && password == confirmationPassword ? true : false;
 

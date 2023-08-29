@@ -10,13 +10,9 @@ const EditDate = ({ dateOfBirth }) => {
   const { updateUserDateOfBirth, refreshUser } = useAuth();
 
   useEffect(() => {
-    dateOfBirth ? setDate(new Date(dateOfBirth)) : setDate(2000, 0, 1);
+    setDate(dateOfBirth);
   }, []);
 
-  const handleEdit = async () => {
-    updateUserDateOfBirth(date);
-    refreshUser();
-  };
   return (
     <TouchableOpacity
       onPress={() => {
@@ -26,10 +22,14 @@ const EditDate = ({ dateOfBirth }) => {
     >
       {date && isDatePickerActive && (
         <DateTimePicker
-          onChange={(event, date) => {
+          onTouchCancel={() => {
+            setIsDatePickerActive(false);
+          }}
+          onChange={async (event, date) => {
             setDate(date);
             setIsDatePickerActive(false);
-            handleEdit();
+            await updateUserDateOfBirth(date);
+            refreshUser();
           }}
           locale="pl-Pl"
           value={date}

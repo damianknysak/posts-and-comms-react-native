@@ -155,7 +155,7 @@ const Post = ({
           <View className="flex-row px-4 pt-2 pb-5 justify-between">
             <View className="flex-row items-center space-x-2">
               <Image
-                className="w-10 h-10"
+                className="w-12 h-12 rounded-full"
                 source={{ uri: `${HOST_URI}/storage/${item.authorImage}` }}
               />
               <Text className="font-semibold">{item.author}</Text>

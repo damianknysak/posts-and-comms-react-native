@@ -55,14 +55,20 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserDateOfBirth = async (date) => {
     try {
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, "0");
+      var day = String(date.getDate()).padStart(2, "0");
+
+      // Składanie daty w formacie "YYYY-MM-DD"
+      var formattedDate = `${year}-${month}-${day}`;
+      console.log(formattedDate);
       const response = await getResponse(
-        { date_of_birth: Math.floor(date.getTime() / 1000) },
+        { date_of_birth: formattedDate },
         `users/edit/${user.id}`,
         "POST",
         token
       );
-      const responseJson = await response.json();
-      console.log(responseJson);
+      console.log(response.status);
       if (response.status == 200) {
         return true;
       }

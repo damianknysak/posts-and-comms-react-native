@@ -5,12 +5,16 @@ import useAuth from "../hooks/useAuth";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 
 const HomeHeader = () => {
-  const { user } = useAuth();
+  const { user, HOST_URI } = useAuth();
 
   return (
     <>
       <View className="mb-3 px-2 flex-row items-center justify-between">
         <View className="flex-1">
+          <Image
+            className="w-12 h-12 rounded-full"
+            source={{ uri: `${HOST_URI}/storage/${user.profile_image}` }}
+          />
           <Text className="text-white font-semibold">{user.name}</Text>
         </View>
         <Image

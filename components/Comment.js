@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/pl";
@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import usePostUtility from "../hooks/usePostUtility";
 
 const Comment = ({ item, withPostLinks, setCommentAction, setRefreshPost }) => {
-  const { user } = useAuth();
+  const { user, HOST_URI } = useAuth();
   const [isCommentDeleted, setIsCommentDeleted] = useState(false);
   const navigation = useNavigation();
   const [editedComment, setEditedComment] = useState("");
@@ -51,9 +51,18 @@ const Comment = ({ item, withPostLinks, setCommentAction, setRefreshPost }) => {
             </View>
           )}
           <View className="shadow-sm bg-white shadow-black mx-4 my-1 rounded-xl">
-            <View className="bg-violet-200   p-2 rounded-xl">
+            <View className="bg-violet-200 space-y-2 p-2 rounded-xl">
               <View className="flex-row justify-between">
-                <Text className="font-semibold">{item.author.name}</Text>
+                <View className="flex-row items-center space-x-1">
+                  <Image
+                    className="w-8 h-8 rounded-full"
+                    source={{
+                      uri: `${HOST_URI}/storage/${item.author.profile_image}`,
+                    }}
+                  />
+                  <Text className="font-semibold">{item.author.name}</Text>
+                </View>
+
                 <Text>{moment(item.createdAt).fromNow()}</Text>
               </View>
               <View>

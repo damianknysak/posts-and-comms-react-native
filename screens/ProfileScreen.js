@@ -22,6 +22,9 @@ const ProfileScreen = () => {
   const [newProfileImage, setNewProfileImage] = useState();
   const navigation = useNavigation();
 
+  useEffect(() => {
+    refreshUser();
+  }, []);
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -72,10 +75,11 @@ const ProfileScreen = () => {
             <Text className="text-xl mt-2">{user.name}</Text>
             <Text className="text-gray-500">{user.email}</Text>
             <Text className="text-black mt-2">
-              Dołączono: {moment(user.created_at).fromNow()}
+              <Text className="font-bold">Dołączono:</Text>{" "}
+              {moment(user.created_at).fromNow()}
             </Text>
             <Text className="text-black mt-2">
-              Data urodzenia:{" "}
+              <Text className="font-semibold">Data urodzenia:</Text>{" "}
               {user.date_of_birth
                 ? new Date(user.date_of_birth).toLocaleDateString()
                 : "nie podano"}
@@ -90,7 +94,13 @@ const ProfileScreen = () => {
                 <Text className="text-center font-semibold">Resetuj hasło</Text>
                 <ArrowPathIcon size={30} color="black" />
               </TouchableOpacity>
-
+              <EditDate
+                dateOfBirth={
+                  user.date_of_birth
+                    ? new Date(user.date_of_birth)
+                    : new Date(2000, 0, 1)
+                }
+              />
               <TouchableOpacity
                 onPress={onLogoutClick}
                 className="flex-row items-center justify-center space-x-1 bg-violet-200 py-4 rounded-xl mx-2 shadow-lg shadow-black"
@@ -98,7 +108,6 @@ const ProfileScreen = () => {
                 <Text className="text-center font-semibold">Wyloguj</Text>
                 <ArrowLeftOnRectangleIcon size={30} color="black" />
               </TouchableOpacity>
-              <EditDate dateOfBirth={new Date(user.date_of_birth)} />
             </View>
             <Text className="font-semibold text-lg my-5">Twoja aktywność</Text>
             <View className="space-y-5  w-full pb-5">

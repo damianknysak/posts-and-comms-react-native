@@ -57,6 +57,7 @@ const ResetPasswordScreen = () => {
         <View className="m-3 space-y-1">
           <Text className="text-black font-semibold">Stare hasło:</Text>
           <TextInput
+            secureTextEntry={true}
             className="bg-white w-full px-2 py-1 rounded border border-gray-500"
             color="black"
             onChangeText={(text) => {
@@ -65,6 +66,7 @@ const ResetPasswordScreen = () => {
           />
           <Text className="text-black font-semibold">Nowe hasło:</Text>
           <TextInput
+            secureTextEntry={true}
             className="bg-white w-full px-2 py-1 rounded border border-gray-500"
             color="black"
             onChangeText={(text) => {
@@ -75,6 +77,7 @@ const ResetPasswordScreen = () => {
             Potwierdź nowe hasło:
           </Text>
           <TextInput
+            secureTextEntry={true}
             className="bg-white w-full  px-2 py-1 rounded border border-gray-500"
             color="black"
             onChangeText={(text) => {
