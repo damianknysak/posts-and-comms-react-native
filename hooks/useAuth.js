@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [isAuthLoading, setIsAuthLoading] = useState();
   const navigation = useNavigation();
-  const HOST_URI = "http://192.168.0.124:8000";
+  const HOST_URI = "http://192.168.0.104:8000";
 
   const API_URI = `${HOST_URI}/api/v1`;
 

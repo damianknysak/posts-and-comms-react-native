@@ -75,7 +75,7 @@ const HomeScreen = () => {
                 }
                 ref={scrollViewRef}
                 contentContainerStyle={{
-                  paddingBottom: 250,
+                  paddingBottom: 350,
                 }}
                 className="bg-white min-h-screen rounded-t-3xl"
                 onScroll={({ nativeEvent }) => {
